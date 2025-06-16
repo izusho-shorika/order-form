@@ -18,7 +18,7 @@
     document.getElementById('orderForm').onsubmit = function(e) {
       e.preventDefault();
       const formData = Object.fromEntries(new FormData(e.target));
-      fetch("<<ここにGASのWebアプリURL>>", {
+      fetch("https://yoshidatoshiyuki.github.io/order-form/", {
         method: "POST",
         body: JSON.stringify(formData)
       }).then(res => alert("注文を送信しました"));
