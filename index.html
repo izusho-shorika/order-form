@@ -27,15 +27,17 @@
     document.getElementById('orderForm').onsubmit = function(e) {
       e.preventDefault();
       const formData = Object.fromEntries(new FormData(e.target));
-      fetch("https://script.google.com/macros/s/AKfycbxXwtdK6dgumgQ_vMaNBVuf2W_RWGbH3Cvxc6P6bG0BHiKKatZ_q1PLYGedIse0K0VT/exec", {
+
+      fetch("https://script.google.com/macros/s/AKfycbyhac01TnlrbCLafv2CEwp0UfSt_zkVS9IxVNRntE-rbzWocJLX-aAcP3vktNn1R4DZ/exec", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(formData)
-      }).then(res => res.text())
-        .then(txt => alert("サーバー応答: " + txt))
-        .catch(err => alert("送信失敗: " + err));
+      })
+      .then(res => res.text())
+      .then(txt => alert("サーバー応答: " + txt))
+      .catch(err => alert("送信失敗: " + err));
     };
   </script>
 </body>
