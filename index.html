@@ -32,7 +32,7 @@
     document.getElementById('orderForm').onsubmit = function(e) {
       e.preventDefault();
       const formData = Object.fromEntries(new FormData(e.target));
-      fetch("https://script.google.com/macros/s/AKfycbz63YM_5eJu0zPVUr79jcPr1UttYojonrcpqmA0glDmjmlX9IkhFp8AAevGsTMA5Peo/exec", {
+      fetch("https://script.google.com/macros/s/AKfycbxXwtdK6dgumgQ_vMaNBVuf2W_RWGbH3Cvxc6P6bG0BHiKKatZ_q1PLYGedIse0K0VT/exec", {
         method: "POST",
         body: JSON.stringify(formData)
       }).then(() => alert("注文が送信されました"));
