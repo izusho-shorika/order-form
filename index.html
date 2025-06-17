@@ -16,8 +16,11 @@
     <button type="submit">注文する</button>
   </form>
 
+  <!-- メッセージ表示用 -->
+  <div id="result" style="margin-top: 20px; font-weight: bold;"></div>
+
   <script>
-    // LIFFアプリ初期化（あなたのLIFF IDに書き換えてください）
+    // LIFF 初期化
     liff.init({
       liffId: "2007592277-rlBakm54"
     }).then(() => {
@@ -27,33 +30,33 @@
     }).catch(err => {
       alert("LIFF初期化エラー: " + err);
     });
-    
-  document.getElementById('orderForm').onsubmit = function(e) {
-    e.preventDefault();
-    const formData = Object.fromEntries(new FormData(e.target));
 
-    fetch("https://script.google.com/macros/s/AKfycbz1tJ_rFp3U0uhIbM9AZ5OUuHVo7la_FzHx2INiy0K6XyoOiHjt0Eb7tNKR7cJDfIpX/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      mode: "no-cors",
-      body: JSON.stringify(formData)
-    }).then(() => {
-      const message =
-        "氏名：" + formData.name + "\n" +
-        "職員室：" + formData.table + "\n" +
-        "商品：" + formData.menu + "\n" +
-        "数量：" + formData.quantity + "\n\n" +
-        "注文を受け付けました。ありがとうございました！";
+    // フォーム送信処理
+    document.getElementById('orderForm').onsubmit = function(e) {
+      e.preventDefault();
+      const formData = Object.fromEntries(new FormData(e.target));
 
-      alert(message);
-      document.getElementById('orderForm').reset();
-    }).catch(err => {
-      alert("送信失敗: " + err);
-    });
-  };
-
+      fetch("https://script.google.com/macros/s/AKfycbz1tJ_rFp3U0uhIbM9AZ5OUuHVo7la_FzHx2INiy0K6XyoOiHjt0Eb7tNKR7cJDfIpX/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        mode: "no-cors",
+        body: JSON.stringify(formData)
+      }).then(() => {
+        const message =
+          "氏名：" + formData.name + "\n" +
+          "職員室：" + formData.table + "\n" +
+          "商品：" + formData.menu + "\n" +
+          "数量：" + formData.quantity + "\n\n" +
+          "注文を受け付けました。ありがとうございました！";
+        
+        alert(message); // または document.getElementById('result').innerText = message;
+        document.getElementById('orderForm').reset();
+      }).catch(err => {
+        alert("送信失敗: " + err);
+      });
+    };
   </script>
 </body>
 </html>
