@@ -28,20 +28,36 @@
       alert("LIFF初期化エラー: " + err);
     });
 
-    document.getElementById('orderForm').onsubmit = function(e) {
-      e.preventDefault();
-      const formData = Object.fromEntries(new FormData(e.target));
-      fetch("https://script.google.com/macros/s/AKfycbz1tJ_rFp3U0uhIbM9AZ5OUuHVo7la_FzHx2INiy0K6XyoOiHjt0Eb7tNKR7cJDfIpX/exec", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        mode: "no-cors",
-        body: JSON.stringify(formData)
-      }).then(res => res.text())
-        .then(txt => alert("サーバー応答: " + txt))
-        .catch(err => alert("送信失敗: " + err));
-    };
+document.getElementById('orderForm').onsubmit = function(e) {
+  e.preventDefault();
+  const formData = Object.fromEntries(new FormData(e.target));
+
+  fetch("https://script.google.com/macros/s/AKfycbz1tJ_rFp3U0uhIbM9AZ5OUuHVo7la_FzHx2INiy0K6XyoOiHjt0Eb7tNKR7cJDfIpX/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    mode: "no-cors", // ←必要（LINE LIFFでPOST成功のため）
+    body: JSON.stringify(formData)
+  })
+  .then(() => {
+    // 注文内容を表示
+    const message = `
+    氏名：${formData.name}
+    職員室：${formData.table}
+    商品：${formData.menu}
+    数量：${formData.quantity}
+
+    注文を受け付けました。ありがとうございました！
+    `;
+    alert(message);
+    document.getElementById('orderForm').reset(); // フォームを初期化
+  })
+  .catch(err => {
+    alert("送信失敗: " + err);
+  });
+};
+
   </script>
 </body>
 </html>
