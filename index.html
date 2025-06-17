@@ -39,31 +39,46 @@
       document.getElementById('result').innerText = "LIFF初期化エラー: " + err;
     });
 
-    document.getElementById('orderForm').onsubmit = function(e) {
-      e.preventDefault();
-      const formData = Object.fromEntries(new FormData(e.target));
+document.getElementById('orderForm').onsubmit = function(e) {
+  e.preventDefault();
+  const formData = Object.fromEntries(new FormData(e.target));
 
-      fetch("https://script.google.com/macros/s/AKfycbz1tJ_rFp3U0uhIbM9AZ5OUuHVo7la_FzHx2INiy0K6XyoOiHjt0Eb7tNKR7cJDfIpX/exec", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        mode: "no-cors",
-        body: JSON.stringify(formData)
-      }).then(() => {
-        const message =
-          "氏名：" + formData.name + "\n" +
-          "職員室：" + formData.table + "\n" +
-          "商品：" + formData.menu + "\n" +
-          "数量：" + formData.quantity + "\n\n" +
-          "注文を受け付けました。ありがとうございました！";
-        
-        document.getElementById('result').innerText = message;
-        document.getElementById('orderForm').reset();
-      }).catch(err => {
-        document.getElementById('result').innerText = "送信失敗: " + err;
-      });
-    };
+  fetch("https://script.google.com/macros/s/AKfycbz1tJ_rFp3U0uhIbM9AZ5OUuHVo7la_FzHx2INiy0K6XyoOiHjt0Eb7tNKR7cJDfIpX/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    mode: "no-cors",
+    body: JSON.stringify(formData)
+  })
+  .then(() => {
+    const message =
+      "氏名：" + formData.name + "\n" +
+      "職員室：" + formData.table + "\n" +
+      "商品：" + formData.menu + "\n" +
+      "数量：" + formData.quantity + "\n\n" +
+      "注文を受け付けました。ありがとうございました！";
+
+    document.getElementById('result').innerHTML = `
+      <pre>${message}</pre>
+      <button onclick="liff.closeWindow()" style="
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #2ecc71;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      ">閉じる</button>
+    `;
+    document.getElementById('orderForm').reset();
+  })
+  .catch(err => {
+    document.getElementById('result').innerText = "送信失敗: " + err;
+  });
+};
+
   </script>
 </body>
 </html>
