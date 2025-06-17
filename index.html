@@ -1,43 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>注文フォーム</title>
-  <!-- LIFF SDK を読み込む -->
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: "Helvetica Neue", sans-serif;
+      background: #f7f9fc;
+      margin: 0;
       padding: 20px;
+      color: #333;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+    form {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      font-weight: bold;
     }
     input, button {
-      margin-bottom: 10px;
-      display: block;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      background-color: #2ecc71;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #27ae60;
     }
     #result {
-      margin-top: 20px;
-      font-weight: bold;
-      white-space: pre-wrap; /* 改行を反映する */
+      max-width: 400px;
+      margin: 20px auto;
+      text-align: center;
+      white-space: pre-wrap;
+      font-size: 16px;
+      color: #2c3e50;
     }
   </style>
 </head>
 <body>
   <h2>出商ITサービス注文フォーム</h2>
+
   <form id="orderForm">
-    氏名：<input type="text" name="name" required><br>
-    職員室：<input type="text" name="table" required><br>
-    商品：<input type="text" name="menu" required><br>
-    数量：<input type="number" name="quantity" required><br>
+    <label for="name">氏名</label>
+    <input type="text" name="name" id="name" required>
+
+    <label for="table">職員室</label>
+    <input type="text" name="table" id="table" required>
+
+    <label for="menu">商品</label>
+    <input type="text" name="menu" id="menu" required>
+
+    <label for="quantity">数量</label>
+    <input type="number" name="quantity" id="quantity" required>
+
     <button type="submit">注文する</button>
   </form>
 
-  <!-- メッセージ表示用 -->
   <div id="result"></div>
 
   <script>
-    // LIFF 初期化
     liff.init({
-      liffId: "2007592277-rlBakm54" // ←あなたのLIFF IDに変更しないでOK
+      liffId: "2007592277-rlBakm54"
     }).then(() => {
       if (!liff.isLoggedIn()) {
         liff.login();
@@ -46,7 +93,6 @@
       document.getElementById('result').innerText = "LIFF初期化エラー: " + err;
     });
 
-    // フォーム送信処理
     document.getElementById('orderForm').onsubmit = function(e) {
       e.preventDefault();
       const formData = Object.fromEntries(new FormData(e.target));
@@ -56,7 +102,7 @@
         headers: {
           "Content-Type": "application/json"
         },
-        mode: "no-cors", // LIFFでPOSTする場合は必要
+        mode: "no-cors",
         body: JSON.stringify(formData)
       }).then(() => {
         const message =
@@ -65,7 +111,7 @@
           "商品：" + formData.menu + "\n" +
           "数量：" + formData.quantity + "\n\n" +
           "注文を受け付けました。ありがとうございました！";
-
+        
         document.getElementById('result').innerText = message;
         document.getElementById('orderForm').reset();
       }).catch(err => {
