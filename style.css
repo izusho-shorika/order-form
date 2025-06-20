@@ -1,620 +1,79 @@
-@charset "utf-8";
-
 body {
-  margin: 0;
-  padding: 0;
-  background-color: #cccccc;
-  color: #333333;
-  font-size: 15px;
-  line-height: 2;
-}
-
-p,h1,h2,h3,h4,h5,h6 {
-  margin-top: 0;
-}
-
-img {
-  vertical-align:bottom;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-}
-
-a {
-  color: #3583aa;
-  text-decoration: none;
-}
-
-a:visited {
-  color: #788d98;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-header {
-  width: 960px;
-  height: 100px;
-  margin: 0 auto;
-}
-
-.logo {
-  float: left;
-  margin-top: 50px;
-}
-
-.global-nav {
-  float: right;
-  margin-top: 60px;
-}
-
-.global-nav li {
-  float: left;
-  margin: 0 20px;
-  font-size: 20px;
-  list-style: none;
-  font-family: 'Bitter', serif;
-}
-
-.global-nav li a {
-  color: #ffffff;
-}
-
-.global-nav li a:hover {
-  border-bottom: 2px solid #ffffff;
-  padding-bottom: 3px;
-  text-decoration: none;
-}
-
-#wrap {
-  clear: both;
-  background-color: #ffffff;
-  margin-top: 220px;
-  padding: 35px 0;
-}
-
-.content {
-  width: 960px;
-  margin: 0 auto;
-}
-
-footer {
-  text-align: center;
-  color: #ffffff;
-  padding: 20px 0;
-  background-color: #767671;
-}
-
-footer small {
-  font-size: 12px;
-}
-
-#index h1 {
-  font-size: 100px;
-  line-height: 1;
-  color: #ffffff;
-  font-family: 'Bitter', serif;
-  margin-bottom: 50px;
-  border: none;
-}
-
-#index .content {
-  margin-top: 150px;
-}
-
-#index p {
-  font-size: 16px;
-  color: #ffffff;
-}
-
-.btn a {
-  background-color: #009cd3;
-  color: #ffffff;
-  font-size: 20px;
-  font-family: 'Bitter', serif;
-  width: 185px;
-  display: block;
-  text-align: center;
-  line-height: 50px;
-  margin-top: 20px;
-  border-radius: 5px;
-  border: 3px solid #009cd3;
-}
-
-.btn a:hover {
-  text-decoration: none;
-  background-color: #ffffff;
-  color: #009cd3;
-}
-
-#index footer {
-  width: 960px;
-  margin: 150px auto 0 auto;
-  text-align: left;
-  background-color: transparent;
-}
-
-#index {
-  background-image: url(../images/bg-index.jpg);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: cover;
-}
-
-#about {
-  background-image: url(../images/bg-about.jpg);
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-attachment: fixed;
-  background-size: 100% auto;
-}
-
-.main-center {
-  width: 940px;
-  margin: 0 auto;
-}
-
-h1 {
-  font-family: 'Bitter', serif;
-  font-size: 36px;
-  border-bottom: 1px solid #cccccc;
+  font-family: "Helvetica Neue", sans-serif;
+  padding: 20px;
+  background-color: #f4f4f4;
 }
 
 h2 {
-  font-family: 'Bitter', serif;
-  font-size: 24px;
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-.icon:before {
-  content: "";
-  padding-right: 10px;
-  border-left: 7px solid #9cb4a4;
+form {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#about .profile-txt {
-  width: 540px;
-  float: left;
-}
-
-#about .profile-txt span {
+label {
+  display: block;
+  margin-top: 15px;
   font-weight: bold;
 }
 
-#about .profile-image {
-  float: right;
-}
-
-.clearfix:after {
-  content: "";
-  display: block;
-  clear: both;
-}
-
-section {
-  margin-bottom: 35px;
-}
-
-#about .career th {
-  width: 240px;
-  background-color: #f0f0f0;
-  padding: 12px 0;
-  border: 1px solid #cccccc;
-}
-
-#about .career td {
-  width: 660px;
-  padding: 12px 0 12px 40px;
-  border: 1px solid #cccccc;
-}
-
-table {
-  border-spacing: 0;
-  border-collapse: collapse;
-}
-
-#index #wrap {
-  background-color: transparent;
-  margin-top: 0;
-  padding: 0;
-}
-
-#portfolio {
-  background-image: url(../images/bg-portfolio.jpg);
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-attachment: fixed;
-  background-size: 100% auto;
-}
-
-.main {
-  width: 700px;
-  margin: 0 10px;
-  float: left;
-}
-
-.sidebar {
-  width: 200px;
-  margin: 0 10px 0 30px;
-  float: right;
-  font-family: 'Bitter', serif;
-}
-
-a img:hover {
-  opacity: 0.8;
-}
-
-.sidebar h2 {
-  margin-bottom: 10px;
-}
-
-.sidebar ul {
-  font-size: 16px;
-  margin-left: 20px;
-}
-
-.sidebar ul a {
-  color: #333333;
-}
-
-#photograph {
-  background-image: url(../images/bg-photograph.jpg);
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-attachment: fixed;
-  background-size: 100% auto;
-}
-
-#photograph .photograph-list li {
-  float: left;
-  list-style: none;
-  margin: 0 20px 15px 0;
-}
-
-#photograph .photograph-list li:nth-child(3n) {
-  margin-right: 0;
-}
-
-#video {
-  background-image: url(../images/bg-video.jpg);
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-attachment: fixed;
-  background-size: 100% auto;
-}
-
-#contact {
-  background-image: url(../images/bg-contact.jpg);
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-attachment: fixed;
-  background-size: 100% auto;
-}
-
-#contact .access table {
-  float: left;
-}
-
-#contact .access th,
-#contact .access td {
-  text-align: left;
-  vertical-align: top;
-  line-height: 2.5;
-}
-
-#contact .access td {
-  padding-left: 30px;
-}
-
-#contact .access iframe {
-  width: 460px;
-  float: right;
-}
-
-#contact .form {
-  background-color: #eaeaea;
-  padding: 30px 50px;
-}
-
-#contact .form dl dt {
-  width: 165px;
-  padding: 10px 0;
-  float: left;
-  clear: both;
-}
-
-#contact .form dl dd {
-  padding: 10px 0;
-}
-
-#contact .form .name {
-  width: 240px;
-  height: 30px;
-}
-
-#contact .form .email {
-  width: 300px;
-  height: 30px;
-}
-
-#contact .form .tel {
-  width: 240px;
-  height: 30px;
-}
-
-#contact .form .type {
-  width: 180px;
-  height: 30px;
-}
-
-#contact .form .message {
-  width: 660px;
-  height: 150px;
-}
-
-#contact .form button {
-  background-color: #009cd3;
-  color: #ffffff;
-  font-size: 20px;
-  width: 120px;
-  display: block;
-  text-align: center;
-  line-height: 50px;
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  border: 3px solid #009cd3;
-  margin-left: 165px;
+  box-sizing: border-box;
 }
 
-#contact .form button:hover {
-  background-color: #ffffff;
-  color: #009cd3;
+button[type="submit"] {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
 }
 
-#contact .form .required:after {
-  content: "*";
-  color: #ff0000;
+button[type="submit"]:hover {
+  background-color: #2980b9;
 }
 
-#contact .form .attention {
-  margin: 20px 0 0 165px;
+.message-box {
+  background-color: #fff;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 5px solid #2ecc71;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
-@media screen and (max-width: 480px){ /*480pxより小さい場合に適用*/
-  body {
-    margin: 0;
-    padding: 0;
-    font-size: 15px;
-    line-height: 2;
-  }
+.message-box p {
+  margin: 5px 0;
+  font-size: 16px;
+}
 
-  img {
-    vertical-align:bottom;
-    width:100%;
-  }
-    
-  header {
-    width: auto;
-    height: 100px;
-    margin: 0 auto;
-  }
-  
-  .logo {
-    float:none;
-    margin-top: 20px;
-  }
-  
-  .global-nav {
-    float: none;
-    margin-top: 20px;
-  }
-  
-  .global-nav li {
-    float: none;
-    margin: 0 20px;
-    font-size: 20px;
-  }
-  
-  #wrap {
-    clear: both;
-    background-color: #ffffff;
-    margin-top: 110px;
-    padding: 35px 0;
-  }
-  
-  .content {
-    width:auto;
-    margin: 0 auto;
-  }
-  
-  footer small {
-    font-size: 12px;
-  }
-  
-  #index h1 {
-    font-size: 100px;
-    line-height: 1;
-    margin-bottom: 30px;
-  }
-  
-  #index .content {
-    margin-top: 80px;
-  }
-  
-  #index p {
-    font-size: 16px;
-  }
-  
-  .btn a {
-    font-size: 20px;
-    width: 80px;
-    line-height: 50px;
-    margin-top: 20px;
-    border-radius: 5px;
-  }
-  
-  #index footer {
-    width: auto;
-    margin: 20px auto 0 auto;
-  }
-  
-  .main-center {
-    width: auto;
-    margin: 0 auto;
-  }
-  
-  h1 {
-    font-size: 36px;
-  }
-  
-  h2 {
-    font-size: 24px;
-  }
-  
-  #about .profile-txt {
-    width: auto;
-    float: none;
-  }
+.close-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-  #about .profile-image {
-    float: none;
-  }
-  
-  section {
-    margin-bottom: 35px;
-  }
-  
-  #about .career th {
-    width: 240px;
-    padding: 12px 0;
-  }
-  
-  #about .career td {
-    width: 360px;
-    padding: 12px 0 12px 40px;
-  }
-  
-  .main {
-    width: auto;
-    margin: 0 10px;
-    float: none;
-  }
-  
-  .sidebar {
-    width: auto;
-    margin: 0 10px 0 30px;
-    float: none;
-  }
-  
-  a img:hover {
-    opacity: 0.8;
-  }
-  
-  .sidebar h2 {
-    margin-bottom: 10px;
-  }
-  
-  .sidebar ul {
-    font-size: 16px;
-    margin-left: 20px;
-  }
-  
-  .sidebar ul a {
-    color: #333333;
-  }
-  
-  #photograph .photograph-list li {
-    float: none;
-    list-style: none;
-    margin: 0 20px 15px 0;
-  }
-  
-  #photograph .photograph-list li:nth-child(3n) {
-    margin-right: 0;
-  }
-
-  
-  #contact .access table {
-    float: none;
-  }
-  
-  #contact .access th,
-  #contact .access td {
-    text-align: none;
-    vertical-align: top;
-    line-height: 2.5;
-  }
-  
-  #contact .access td {
-    padding-left: 30px;
-  }
-  
-  #contact .access iframe {
-    width: auto;
-    float: none;
-  }
-  
-  #contact .form {
-    padding: 30px 50px;
-  }
-  
-  #contact .form dl dt {
-    width: 165px;
-    padding: 10px 0;
-    float: none;
-    clear: both;
-  }
-  
- 
-  #contact .form .name {
-    width: auto;
-    height: 30px;
-  }
-  
-  #contact .form .email {
-    width: auto;
-    height: 30px;
-  }
-  
-  #contact .form .tel {
-    width: auto;
-    height: 30px;
-  }
-  
-  #contact .form .type {
-    width: auto;
-    height: 30px;
-  }
-  
-  #contact .form .message {
-    width: auto;
-    height: 150px;
-  }
-  
-  #contact .form button {
-    font-size: 20px;
-    width: 120px;
-    line-height: 50px;
-    margin-left: 165px;
-  }
-  
-  #contact .form button:hover {
-    background-color: #ffffff;
-    color: #009cd3;
-    cursor: pointer;
-  }
-  
-  #contact .form .required:after {
-    content: "*";
-    color: #ff0000;
-  }
-  
-  #contact .form .attention {
-    margin: 20px 0 0 165px;
-  }
-
-
+.close-btn:hover {
+  background-color: #27ae60;
 }
