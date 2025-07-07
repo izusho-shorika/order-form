@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>出商スマホで注文サービス</h2>
+  <h2>出商スマホで注文サービス(ver.1)</h2>
 
   <form id="orderForm">
     <label for="name">氏名</label>
@@ -71,6 +71,12 @@
     // 注文送信
     document.getElementById('orderForm').onsubmit = function(e) {
       e.preventDefault();
+
+      // ボタンを無効化
+      const submitButton = document.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.innerText = "送信中...";
+
       const formData = Object.fromEntries(new FormData(e.target));
 
       fetch("https://script.google.com/macros/s/AKfycbz1tJ_rFp3U0uhIbM9AZ5OUuHVo7la_FzHx2INiy0K6XyoOiHjt0Eb7tNKR7cJDfIpX/exec", {
@@ -97,6 +103,11 @@
       })
       .catch(err => {
         document.getElementById('result').innerText = "送信失敗: " + err;
+      })
+      .finally(() => {
+        // ボタンを再有効化
+        submitButton.disabled = false;
+        submitButton.innerText = "注文する";
       });
     };
   </script>
