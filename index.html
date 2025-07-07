@@ -17,13 +17,27 @@
     <input type="text" name="name" id="name" required>
 
     <label for="table">職員室</label>
-    <input type="text" name="table" id="table" required>
+    <select name="table" id="table" required>
+      <option value="" disabled selected>選択してください</option>
+      <option value="1. 職員室">1. 職員室</option>
+      <option value="2. 商業センター">2. 商業センター</option>
+      <option value="3. 生徒指導室">3. 生徒指導室</option>
+      <option value="4. 図書準備室">4. 図書準備室</option>
+      <option value="5. 進路指導室">5. 進路指導室</option>
+    </select>
 
     <label for="menu">商品</label>
-    <input type="text" name="menu" id="menu" required>
+    <select name="menu" id="menu" required>
+      <option value="" disabled selected>選択してください</option>
+      <option value="スナック菓子 1個70円">1. スナック菓子 1個70円</option>
+      <option value="キットカット 1個50円">2. キットカット 1個50円</option>
+      <option value="バームクーヘン 1個50円">3. バームクーヘン 1個50円</option>
+      <option value="アイスクリーム 1個100円">4. アイスクリーム 1個100円</option>
+      <option value="アイスコーヒー 1杯70円">5. アイスコーヒー 1杯70円</option>
+    </select>
 
     <label for="quantity">数量</label>
-    <input type="number" name="quantity" id="quantity" required>
+    <input type="number" name="quantity" id="quantity" min="1" required>
 
     <button type="submit">注文する</button>
   </form>
