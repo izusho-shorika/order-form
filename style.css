@@ -77,3 +77,12 @@ button[type="submit"]:hover {
 .close-btn:hover {
   background-color: #27ae60;
 }
+select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
