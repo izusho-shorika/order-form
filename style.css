@@ -4,6 +4,12 @@ body {
   background-color: #f4f4f4;
 }
 
+input[type="text"],
+input[type="number"],
+select {
+  font-size: 18px; /* ←16px以上にする */
+}
+
 h2 {
   text-align: center;
   color: #333;
