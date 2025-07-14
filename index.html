@@ -38,25 +38,28 @@
     このブラウザは動画に対応していません。
   </video>
 
-  <!-- スキップボタン -->
   <button id="skip-button">×</button>
 
   <script>
-  const video = document.getElementById('cmVideo');
-const skipBtn = document.getElementById('skip-button');
+    const video = document.getElementById('cmVideo');
+    const skipBtn = document.getElementById('skip-button');
 
-// 5秒後にスキップボタンを表示
-setTimeout(() => {
-  skipBtn.style.display = 'block';
-}, 5000);
+    // 5秒後にスキップボタンを表示
+    setTimeout(() => {
+      skipBtn.style.display = 'block';
+    }, 5000);
 
-// スキップボタンを押したときの処理
-skipBtn.addEventListener('click', () => {
-  video.pause();           // ✅ 再生を停止
-  video.currentTime = 0;   // ✅ 再生位置を0に戻す（念のため）
-  window.location.href = 'order.html'; // 注文ページに遷移
-});
+    // 動画再生が最後まで終わったとき、自動で注文ページへ
+    video.addEventListener('ended', () => {
+      location.replace('order.html'); // 履歴に残さず遷移
+    });
 
-　</script>
+    // ×ボタンで注文ページへ（動画停止＋履歴を残さない）
+    skipBtn.addEventListener('click', () => {
+      video.pause();
+      video.currentTime = 0;
+      location.replace('order.html'); // ✅ 戻るボタンで戻らないようにする
+    });
+  </script>
 </body>
 </html>
