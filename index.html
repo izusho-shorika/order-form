@@ -42,17 +42,21 @@
   <button id="skip-button">×</button>
 
   <script>
-    const skipBtn = document.getElementById('skip-button');
+  const video = document.getElementById('cmVideo');
+const skipBtn = document.getElementById('skip-button');
 
-    // 5秒後にスキップボタンを表示
-    setTimeout(() => {
-      skipBtn.style.display = 'block';
-    }, 5000);
+// 5秒後にスキップボタンを表示
+setTimeout(() => {
+  skipBtn.style.display = 'block';
+}, 5000);
 
-    // スキップで注文フォームへ
-    skipBtn.addEventListener('click', () => {
-      window.location.href = 'order.html'; // 注文フォームへ遷移
-    });
-  </script>
+// スキップボタンを押したときの処理
+skipBtn.addEventListener('click', () => {
+  video.pause();           // ✅ 再生を停止
+  video.currentTime = 0;   // ✅ 再生位置を0に戻す（念のため）
+  window.location.href = 'order.html'; // 注文ページに遷移
+});
+
+　</script>
 </body>
 </html>
