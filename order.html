@@ -53,9 +53,9 @@
   <div id="result"></div>
 
   <script>
-    // ✅ LIFF初期化（重要！）
+    // ✅ LIFF初期化
     liff.init({
-      liffId: "2007592277-rlBakm54"  // あなたのLIFF IDでOK
+      liffId: "2007592277-rlBakm54"
     }).then(() => {
       if (!liff.isLoggedIn()) {
         liff.login();
@@ -90,7 +90,7 @@
             <p><strong>商品：</strong>${formData.menu}</p>
             <p><strong>数量：</strong>${formData.quantity}</p>
             <p>注文を受け付けました。ありがとうございました！</p>
-            <button onclick="liff.closeWindow()" class="close-btn">閉じる</button>
+            <button onclick="tryCloseWindow()" class="close-btn">閉じる</button>
           </div>
         `;
         document.getElementById('result').innerHTML = message;
@@ -104,6 +104,15 @@
         submitButton.innerText = "注文する";
       });
     };
+
+    // ✅ LINEアプリ内のみ閉じる
+    function tryCloseWindow() {
+      if (liff.isInClient()) {
+        liff.closeWindow();
+      } else {
+        alert("このボタンはLINEアプリ内でのみ動作します。");
+      }
+    }
   </script>
 </body>
 </html>
