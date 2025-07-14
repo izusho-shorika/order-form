@@ -4,8 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>注文フォーム</title>
+
   <!-- LIFF SDK -->
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
   <!-- スタイルシート -->
   <link rel="stylesheet" href="style.css">
 </head>
@@ -51,9 +53,9 @@
   <div id="result"></div>
 
   <script>
-    // LIFF初期化
+    // ✅ LIFF初期化（重要！）
     liff.init({
-      liffId: "2007592277-rlBakm54"
+      liffId: "2007592277-rlBakm54"  // あなたのLIFF IDでOK
     }).then(() => {
       if (!liff.isLoggedIn()) {
         liff.login();
@@ -62,11 +64,10 @@
       document.getElementById('result').innerText = "LIFF初期化エラー: " + err;
     });
 
-    // 注文送信
+    // 注文送信処理
     document.getElementById('orderForm').onsubmit = function(e) {
       e.preventDefault();
 
-      // ボタンを無効化
       const submitButton = document.querySelector('button[type="submit"]');
       submitButton.disabled = true;
       submitButton.innerText = "送信中...";
@@ -99,7 +100,6 @@
         document.getElementById('result').innerText = "送信失敗: " + err;
       })
       .finally(() => {
-        // ボタンを再有効化
         submitButton.disabled = false;
         submitButton.innerText = "注文する";
       });
