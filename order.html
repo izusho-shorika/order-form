@@ -51,30 +51,43 @@
   </form>
 
   <div id="result"></div>
+  <p id="debug"></p>
 
   <script>
-    // ✅ LIFF初期化
-    liff.init({
-      liffId: "2007592277-rlBakm54"
-    }).then(() => {
-      if (!liff.isLoggedIn()) {
-        liff.login();
-      }
-    }).catch(err => {
-      document.getElementById('result').innerText = "LIFF初期化エラー: " + err;
-    });
-
-    // ✅ 閉じる処理
+    // 閉じる処理（LIFF内 or fallback）
     function tryCloseWindow() {
       try {
-        console.log("isInClient:", liff.isInClient());
-        liff.closeWindow();
+        const isClient = liff.isInClient();
+        console.log("isInClient:", isClient);
+        document.getElementById('debug').innerText = "isInClient: " + isClient;
+
+        if (isClient) {
+          liff.closeWindow();
+        } else {
+          alert("LINEアプリ外で開かれているため、ウィンドウを閉じられません。LINEアプリから開いてください。");
+          location.href = "https://line.me";  // fallback（任意）
+        }
       } catch (e) {
         alert("閉じる処理に失敗しました：" + e);
       }
     }
 
-    // ✅ 注文送信
+    // LIFF初期化
+    liff.init({
+      liffId: "2007592277-rlBakm54"
+    }).then(() => {
+      if (!liff.isLoggedIn()) {
+        liff.login();
+      } else {
+        const isClient = liff.isInClient();
+        console.log("LIFF初期化成功。isInClient:", isClient);
+        document.getElementById('debug').innerText = "isInClient: " + isClient;
+      }
+    }).catch(err => {
+      document.getElementById('result').innerText = "LIFF初期化エラー: " + err;
+    });
+
+    // 注文送信
     document.getElementById('orderForm').onsubmit = function(e) {
       e.preventDefault();
 
