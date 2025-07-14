@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>広告CM</title>
+  <title>CM広告</title>
   <style>
     html, body {
       margin: 0;
@@ -33,32 +33,55 @@
   </style>
 </head>
 <body>
+  <!-- 動画広告 -->
   <video autoplay muted playsinline id="cmVideo">
     <source src="izusho_cm_01.mp4" type="video/mp4" />
     このブラウザは動画に対応していません。
   </video>
 
+  <!-- スキップボタン -->
   <button id="skip-button">×</button>
 
+  <!-- LIFF SDK -->
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
     const video = document.getElementById('cmVideo');
     const skipBtn = document.getElementById('skip-button');
 
-    // 5秒後にスキップボタンを表示
-    setTimeout(() => {
-      skipBtn.style.display = 'block';
-    }, 5000);
+    // LIFF初期化
+    liff.init({
+      liffId: "https://liff.line.me/2007592277-rlBakm54"  // ←あなたのLIFF IDに書き換えてください
+    }).then(() => {
+      if (!liff.isLoggedIn()) {
+        liff.login();
+      }
 
-    // 動画再生が最後まで終わったとき、自動で注文ページへ
-    video.addEventListener('ended', () => {
-      location.replace('order.html'); // 履歴に残さず遷移
-    });
+      // 5秒後にスキップボタンを表示
+      setTimeout(() => {
+        skipBtn.style.display = 'block';
+      }, 5000);
 
-    // ×ボタンで注文ページへ（動画停止＋履歴を残さない）
-    skipBtn.addEventListener('click', () => {
-      video.pause();
-      video.currentTime = 0;
-      location.replace('order.html'); // ✅ 戻るボタンで戻らないようにする
+      // 動画終了時に自動で注文ページへ遷移
+      video.addEventListener('ended', () => {
+        liff.openWindow({
+          url: "https://izusho-shorika.github.io/order.html", // ←注文ページのURLに変更
+          external: false
+        });
+      });
+
+      // ×ボタンを押した場合
+      skipBtn.addEventListener('click', () => {
+        video.pause();
+        video.currentTime = 0;
+        liff.openWindow({
+          url: "https://izusho-shorika.github.io/order.html", // ←注文ページのURLに変更
+          external: false
+        });
+      });
+
+    }).catch(err => {
+      console.error("LIFF初期化エラー", err);
+      alert("LIFFの初期化に失敗しました：" + err);
     });
   </script>
 </body>
