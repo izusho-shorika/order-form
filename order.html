@@ -64,7 +64,17 @@
       document.getElementById('result').innerText = "LIFF初期化エラー: " + err;
     });
 
-    // 注文送信処理
+    // ✅ 閉じる処理
+    function tryCloseWindow() {
+      try {
+        console.log("isInClient:", liff.isInClient());
+        liff.closeWindow();
+      } catch (e) {
+        alert("閉じる処理に失敗しました：" + e);
+      }
+    }
+
+    // ✅ 注文送信
     document.getElementById('orderForm').onsubmit = function(e) {
       e.preventDefault();
 
@@ -76,9 +86,7 @@
 
       fetch("https://script.google.com/macros/s/AKfycbz1tJ_rFp3U0uhIbM9AZ5OUuHVo7la_FzHx2INiy0K6XyoOiHjt0Eb7tNKR7cJDfIpX/exec", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         mode: "no-cors",
         body: JSON.stringify(formData)
       })
@@ -104,15 +112,6 @@
         submitButton.innerText = "注文する";
       });
     };
-
-    // ✅ LINEアプリ内のみ閉じる
-    function tryCloseWindow() {
-      if (liff.isInClient()) {
-        liff.closeWindow();
-      } else {
-        alert("このボタンはLINEアプリ内でのみ動作します。");
-      }
-    }
   </script>
 </body>
 </html>
