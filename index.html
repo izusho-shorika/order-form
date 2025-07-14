@@ -2,180 +2,172 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>出商スマホで注文サービス</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CM動画 + 注文フォーム</title>
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <link rel="stylesheet" href="style.css">
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      background: black;
-      font-family: sans-serif;
-    }
-    #videoSection, #formSection {
-      display: none;
-      height: 100vh;
-      width: 100%;
-    }
-    #videoSection video {
-      width: 100%;
+      font-family: "Helvetica Neue", sans-serif;
+      background-color: #f4f4f4;
       height: 100%;
-      object-fit: cover;
+      overflow: hidden;
     }
-    #skipButton {
+    #video-container {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+    video {
+      max-width: 100%;
+      max-height: 100%;
+    }
+    #skip-button {
       position: absolute;
       top: 20px;
       right: 20px;
-      background: rgba(0,0,0,0.6);
+      background-color: rgba(0, 0, 0, 0.6);
       color: white;
-      font-size: 24px;
       border: none;
+      font-size: 24px;
+      padding: 10px 15px;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
       cursor: pointer;
       display: none;
-      z-index: 999;
+      z-index: 1000;
     }
-    #formSection {
-      background: white;
-      color: black;
+    #form-container {
+      display: none;
       padding: 20px;
+      overflow-y: auto;
+      height: 100vh;
+      box-sizing: border-box;
     }
   </style>
 </head>
 <body>
+  <!-- 動画部分 -->
+  <div id="video-container">
+    <video autoplay muted playsinline id="cmVideo">
+      <source src="izusho_cm_01.mp4" type="video/mp4">
+      このブラウザは動画に対応していません。
+    </video>
+    <button id="skip-button">×</button>
+  </div>
 
-<!-- 動画セクション -->
-<div id="videoSection">
-  <video id="promoVideo" autoplay muted playsinline>
-    <source src="izusho_cm_01.mp4" type="video/mp4">
-    お使いのブラウザは動画に対応していません。
-  </video>
-  <button id="skipButton">×</button>
-</div>
+  <!-- 注文フォーム -->
+  <div id="form-container">
+    <h2>出商スマホで注文サービス(ver.3)</h2>
+    <form id="orderForm">
+      <label for="name">氏名</label>
+      <input type="text" name="name" id="name" required>
 
-<!-- フォームセクション -->
-<div id="formSection">
-  <h2>出商スマホで注文サービス(ver.2)</h2>
-  <form id="orderForm">
-    <label for="name">氏名</label>
-    <input type="text" name="name" id="name" required>
+      <label for="table">利用場所</label>
+      <select name="table" id="table" required>
+        <option value="" disabled selected>選択してください</option>
+        <option value="1. 職員室">1. 職員室</option>
+        <option value="2. 商業センター">2. 商業センター</option>
+        <option value="3. 生徒指導室">3. 生徒指導室</option>
+        <option value="4. 図書準備室">4. 図書準備室</option>
+        <option value="5. 進路指導室">5. 進路指導室</option>
+      </select>
 
-    <label for="table">利用場所</label>
-    <select name="table" id="table" required>
-      <option value="" disabled selected>選択してください</option>
-      <option value="1. 職員室">1. 職員室</option>
-      <option value="2. 商業センター">2. 商業センター</option>
-      <option value="3. 生徒指導室">3. 生徒指導室</option>
-      <option value="4. 図書準備室">4. 図書準備室</option>
-      <option value="5. 進路指導室">5. 進路指導室</option>
-    </select>
+      <label for="menu">商品</label>
+      <select name="menu" id="menu" required>
+        <option value="" disabled selected>選択してください</option>
+        <option value="コーヒー 100円">1. コーヒー 100円</option>
+        <option value="お茶 100円">2. お茶 100円</option>
+        <option value="アクエリアス 100円">3. アクエリアス 100円</option>
+        <option value="スナック菓子 80円">4. スナック菓子 80円</option>
+      </select>
 
-    <label for="menu">商品</label>
-    <select name="menu" id="menu" required>
-      <option value="" disabled selected>選択してください</option>
-      <option value="コーヒー 100円">1. コーヒー 100円</option>
-      <option value="お茶 100円">2. お茶 100円</option>
-      <option value="アクエリアス 100円">3. アクエリアス 100円</option>
-      <option value="スナック菓子 80円">4. スナック菓子 80円</option>
-    </select>
+      <label for="quantity">数量</label>
+      <select name="quantity" id="quantity" required>
+        <option value="" disabled selected>選択してください</option>
+        <option value="1">1個</option>
+        <option value="2">2個</option>
+        <option value="3">3個</option>
+        <option value="4">4個</option>
+        <option value="5">5個</option>
+      </select>
 
-    <label for="quantity">数量</label>
-    <select name="quantity" id="quantity" required>
-      <option value="" disabled selected>選択してください</option>
-      <option value="1">1個</option>
-      <option value="2">2個</option>
-      <option value="3">3個</option>
-      <option value="4">4個</option>
-      <option value="5">5個</option>
-    </select>
+      <button type="submit">注文する</button>
+    </form>
+    <div id="result"></div>
+  </div>
 
-    <button type="submit">注文する</button>
-  </form>
-  <div id="result"></div>
-</div>
+  <script>
+    const video = document.getElementById('cmVideo');
+    const skipBtn = document.getElementById('skip-button');
+    const videoContainer = document.getElementById('video-container');
+    const formContainer = document.getElementById('form-container');
 
-<!-- JavaScript -->
-<script>
-  const video = document.getElementById('promoVideo');
-  const skipButton = document.getElementById('skipButton');
-  const videoSection = document.getElementById('videoSection');
-  const formSection = document.getElementById('formSection');
+    // LIFF初期化
+    liff.init({ liffId: "2007592277-rlBakm54" }).then(() => {
+      if (!liff.isLoggedIn()) {
+        liff.login();
+      }
+    });
 
-  // LIFF初期化
-  liff.init({
-    liffId: "2007592277-rlBakm54"
-  }).then(() => {
-    if (!liff.isLoggedIn()) {
-      liff.login();
-    }
-    // 動画表示開始
-    videoSection.style.display = 'block';
-
-    // 5秒後に×ボタン表示
+    // 5秒後にスキップボタン表示
     setTimeout(() => {
-      skipButton.style.display = 'block';
+      skipBtn.style.display = 'block';
     }, 5000);
 
-    // ×ボタン押下または再生終了でフォームへ
-    skipButton.addEventListener('click', showForm);
+    // スキップボタンまたは動画終了時
+    function showForm() {
+      video.pause();
+      videoContainer.style.display = 'none';
+      formContainer.style.display = 'block';
+    }
+
+    skipBtn.addEventListener('click', showForm);
     video.addEventListener('ended', showForm);
 
-  }).catch(err => {
-    alert("LIFF初期化エラー：" + err);
-  });
+    // 注文処理
+    document.getElementById('orderForm').onsubmit = function(e) {
+      e.preventDefault();
+      const submitButton = document.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.innerText = "送信中...";
 
-  function showForm() {
-    video.pause();
-    videoSection.style.display = 'none';
-    formSection.style.display = 'block';
-  }
+      const formData = Object.fromEntries(new FormData(e.target));
 
-  // 注文フォーム送信
-  document.getElementById('orderForm').onsubmit = function(e) {
-    e.preventDefault();
+      fetch("https://script.google.com/macros/s/AKfycbz1tJ_rFp3U0uhIbM9AZ5OUuHVo7la_FzHx2INiy0K6XyoOiHjt0Eb7tNKR7cJDfIpX/exec", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        mode: "no-cors",
+        body: JSON.stringify(formData)
+      }).then(() => {
+        document.getElementById('result').innerHTML = `
+          <div class="message-box">
+            <p><strong>氏名：</strong>${formData.name}</p>
+            <p><strong>職員室：</strong>${formData.table}</p>
+            <p><strong>商品：</strong>${formData.menu}</p>
+            <p><strong>数量：</strong>${formData.quantity}</p>
+            <p>注文を受け付けました。ありがとうございました！</p>
+            <button onclick="tryCloseWindow()" class="close-btn">閉じる</button>
+          </div>`;
+        document.getElementById('orderForm').reset();
+      }).finally(() => {
+        submitButton.disabled = false;
+        submitButton.innerText = "注文する";
+      });
+    };
 
-    const submitButton = document.querySelector('button[type="submit"]');
-    submitButton.disabled = true;
-    submitButton.innerText = "送信中...";
-
-    const formData = Object.fromEntries(new FormData(e.target));
-
-    fetch("https://script.google.com/macros/s/AKfycbz1tJ_rFp3U0uhIbM9AZ5OUuHVo7la_FzHx2INiy0K6XyoOiHjt0Eb7tNKR7cJDfIpX/exec", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      mode: "no-cors",
-      body: JSON.stringify(formData)
-    }).then(() => {
-      const message = `
-        <div class="message-box">
-          <p><strong>氏名：</strong>${formData.name}</p>
-          <p><strong>職員室：</strong>${formData.table}</p>
-          <p><strong>商品：</strong>${formData.menu}</p>
-          <p><strong>数量：</strong>${formData.quantity}</p>
-          <p>注文を受け付けました。ありがとうございました！</p>
-          <button onclick="tryCloseWindow()" class="close-btn">閉じる</button>
-        </div>
-      `;
-      document.getElementById('result').innerHTML = message;
-      document.getElementById('orderForm').reset();
-    }).catch(err => {
-      document.getElementById('result').innerText = "送信失敗: " + err;
-    }).finally(() => {
-      submitButton.disabled = false;
-      submitButton.innerText = "注文する";
-    });
-  };
-
-  function tryCloseWindow() {
-    if (liff.isInClient()) {
-      liff.closeWindow();
-    } else {
-      alert("LINEアプリ内で開いている場合のみ閉じられます。");
+    function tryCloseWindow() {
+      if (liff.isInClient()) {
+        liff.closeWindow();
+      } else {
+        alert("LINEアプリ内で開いていないため、閉じることができません。");
+      }
     }
-  }
-</script>
+  </script>
 </body>
 </html>
