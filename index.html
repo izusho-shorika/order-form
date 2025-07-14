@@ -33,45 +33,41 @@
   </style>
 </head>
 <body>
-  <!-- 動画広告 -->
   <video autoplay muted playsinline id="cmVideo">
     <source src="izusho_cm_01.mp4" type="video/mp4" />
     このブラウザは動画に対応していません。
   </video>
 
-  <!-- スキップボタン -->
   <button id="skip-button">×</button>
 
-  <!-- LIFF SDK -->
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
     const video = document.getElementById('cmVideo');
     const skipBtn = document.getElementById('skip-button');
 
-    // LIFF初期化
-    liff.init({
-      liffId: "2007592277-rlBakm54"  // ご自身のLIFF ID
-    }).then(() => {
+    liff.init({ liffId: "2007592277-rlBakm54" }).then(() => {
       if (!liff.isLoggedIn()) {
         liff.login();
+        return;
       }
 
-      // 5秒後にスキップボタン表示
+      // 5秒後に×表示
       setTimeout(() => {
         skipBtn.style.display = 'block';
       }, 5000);
 
-      // スキップボタンまたは動画終了時に order.html へ遷移
+      // 注文ページへ遷移
       const goToOrder = () => {
-        window.location.href = "order.html"; // 同一WebView内で遷移させる
+        liff.openWindow({
+          url: window.location.origin + "/order-form/order.html",
+          external: false
+        });
       };
 
       video.addEventListener('ended', goToOrder);
       skipBtn.addEventListener('click', goToOrder);
-
     }).catch(err => {
-      console.error("LIFF初期化エラー", err);
-      alert("LIFFの初期化に失敗しました：" + err);
+      alert("LIFF初期化エラー: " + err);
     });
   </script>
 </body>
