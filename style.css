@@ -85,7 +85,8 @@ button[type="submit"]:hover {
 /* ロゴのスタイル */
 .logo {
   display: block;
-  max-width: 200px;
-  height: auto;
-  margin: 0 auto 20px;
+  width: 100%;            /* 横幅いっぱいに広げる */
+  max-width: 100%;        /* 親要素以上に広がらないように */
+  height: auto;           /* アスペクト比維持 */
+  margin: 0 auto 20px;    /* 上下中央揃え */
 }
