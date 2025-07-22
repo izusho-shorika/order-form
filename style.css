@@ -2,14 +2,14 @@ body {
   font-family: "Helvetica Neue", sans-serif;
   padding: 20px;
   background-color: #f4f4f4;
-  max-width: 100vw;          /* 横幅の最大値を画面幅に制限 */
-  overflow-x: hidden;        /* 横スクロールを防止 */
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 input[type="text"],
 input[type="number"],
 select {
-  font-size: 18px;           /* スマホでの拡大防止 */
+  font-size: 18px;
   width: 100%;
   padding: 12px;
   margin-top: 5px;
@@ -80,4 +80,12 @@ button[type="submit"]:hover {
 
 .close-btn:hover {
   background-color: #27ae60;
+}
+
+/* ロゴのスタイル */
+.logo {
+  display: block;
+  max-width: 200px;
+  height: auto;
+  margin: 0 auto 20px;
 }
